@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	</f:facet>
+
+	<title>AdminLTE 2 | Dashboard</title>
+
+	<h:outputStylesheet library="css" name="AdminLTE.min.css" />
+	<h:outputStylesheet library="css" name="all-skins.min.css" />
+
+	<h:outputScript target="body" library="js" name="jquery.slimscroll.min.js" />
+	 	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" /> 
+	<h:outputScript target="body" library="js" name="adminlte.min.js" />
+	<h:outputScript target="body" library="js" name="demo.js" />
+	<h:outputScript target="body" library="js" name="bootstrap.min.js" />
+	<h:outputScript target="body" library="js" name="chart.min.js" />	
+	<h:outputScript target="body" library="js" name="holder.min.js" />	
+	<!-- <h:outputScript target="body" library="js" name="jquery.treefilter.js" /> -->	
+	<h:outputScript target="body" library="js" name="search.js" />	
+	<!-- <h:outputScript target="body" library="js" name="jquery.min.js" /> -->
+</h:head>
+
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|=========================================================|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|=========================================================|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|=========================================================|
+-->
+
+<h:body class="hold-transition skin-blue fixed sidebar-mini ">
+	<div class="wrapper">
+
+		<header class="main-header">
+			<ui:include src="top-menu.xhtml"></ui:include>
+		</header>
+
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+			<ui:include src="menu.xhtml"></ui:include>
+
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<section>
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<h1>
+						<ui:insert name="title" />
+						<small><ui:insert name="description" /></small>
+					</h1>
+					<!--       <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Charts</a></li>
+        <li class="active">ChartJS</li>
+      </ol> -->
+				</section>
+
+				<!-- Main content -->
+				<section class="content">
+					<ui:insert name="body" />
+
+
+				</section>
+				<!-- /.content -->
+			</div>
+			<!-- <ui:insert name="content" /> -->
+		</section>
+
+		<!-- /.content-wrapper -->
+		<footer class="main-footer">
+			<ui:include src="footer.xhtml"></ui:include>
+		</footer>
+
+	</div>
+	<!-- ./wrapper -->
+
+
+	<section>
+		<ui:include src="settings.xhtml"></ui:include>
+	</section>
+
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- 	<script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script> -->
+
+</h:body>
+
+
+
+</html>

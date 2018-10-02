@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+	<!-- Sidebar user panel -->
+	<!-- 				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="" class="img-circle" alt="User Image" />
+					</div>
+					<div class="pull-left info">
+						<p>Alexander Pierce</p>
+						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+					</div>
+				</div> -->
+	<!-- search form -->
+	<div class="sidebar-form">
+		<div class="input-group">
+			<input type="text" name="q" class="form-control"
+				placeholder="buscar..." autocomplete="off"
+				onclick="this.value = '';searchLeftMenu('')"
+				onkeyup="searchLeftMenu(this.value)"
+				onblur="this.value = '';hideMenuResults()" /> <span
+				class="input-group-btn">
+				<button type="submit" name="search" id="search-btn"
+					class="btn btn-flat">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+
+		</div>
+
+		<ul id="menu-search" class="nav navbar-nav" role="menu">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" aria-expanded="true" />
+				<ul class="dropdown-menu" role="menu">
+				</ul></li>
+		</ul>
+	</div>
+	<!-- /.search form -->
+	<!-- sidebar menu: : style can be found in sidebar.less -->
+	<ul class="sidebar-menu tree" data-widget="tree">
+		<li><p:link>
+				<i class="fa fa-home"></i>
+				<span>Home</span>
+			</p:link></li>
+		<li><p:link outcome="/view/casodeuso1.xhtml">
+				<i class="fa fa-pie-chart"></i>
+				<span>Caso de uso 1</span>
+			</p:link></li>
+		<li><p:link outcome="/view/casodeuso2.xhtml">
+				<i class="fa fa-pie-chart"></i>
+				<span>Caso de uso 2</span>
+			</p:link></li>
+		<li><p:link outcome="/view/casodeuso2.xhtml">
+				<i class="fa fa-pie-chart"></i>
+				<span>Caso de uso 3</span>
+			</p:link></li>
+
+	</ul>
+</section>
+
+</html>
