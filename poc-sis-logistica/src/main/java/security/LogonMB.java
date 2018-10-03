@@ -9,12 +9,14 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import model.User;
+
 /**
  * @link https://arjan-tijms.omnifaces.org/p/jsf-23.html
  * @author rruffer
  *
  */
-@Named
+@Named("logonMB")
 @SessionScoped
 public class LogonMB implements Serializable{
 	
@@ -23,15 +25,19 @@ public class LogonMB implements Serializable{
 	@Inject
 	FacesContext facesContext;
 
+	private User user;
+	
 	private Integer matricula;
 	private String senha;
 
 	public String logon() {
 		
-		if(matricula.equals(111) && senha.equals("111")) {
+		user = new User(matricula, senha);
+		
+		if(user.getMatricula().equals(111) && user.getSenha().equals("111")) {
 			
 			try {
-				facesContext.getCurrentInstance().getExternalContext().redirect("/sis-logistica/faces/view/index.xhtml");
+				facesContext.getCurrentInstance().getExternalContext().redirect("/sis-logistica/restricted/index.xhtml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -39,8 +45,9 @@ public class LogonMB implements Serializable{
 			
 		}else {
 			
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "teste login", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário não existe", null);
 			facesContext.getCurrentInstance().addMessage(null, message);
+			user = null;
 		}
 		
 		return null;
@@ -61,6 +68,16 @@ public class LogonMB implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

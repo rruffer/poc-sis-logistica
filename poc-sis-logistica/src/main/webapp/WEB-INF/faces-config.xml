@@ -5,7 +5,7 @@
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_4.xsd"
     version="2.4">
     
-       <application>
+<!--        <application>
 
 	 	<locale-config>
 	   		<default-locale>pt_BR</default-locale>
@@ -18,8 +18,8 @@
 	  	
 	  	<message-bundle>mensagensValidacao</message-bundle>
 	  	
-	  	<!-- <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler> -->
+	  	<resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
 
-	</application>
+	</application> -->
 
 </faces-config>
