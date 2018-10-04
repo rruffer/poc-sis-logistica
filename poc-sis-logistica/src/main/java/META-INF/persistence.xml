@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="logistica"
+		transaction-type="RESOURCE_LOCAL">
+		<!-- <persistence-unit name="logistica" transaction-type="JTA"> -->
+
+
+		<description>Peristence Unit</description>
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+		<!-- <jta-data-source>jdbc/LOGISTICA-DB</jta-data-source> -->
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://192.168.99.100/dblogistica" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password"
+				value="root" />
+
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> <property 
+				name="hibernate.connection.url" value="jdbc:mysql://192.168.99.100/dblogistica"/> 
+				<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/> 
+				<property name="hibernate.connection.username" value="root"/> <property name="hibernate.connection.password" 
+				value="root"/> <property name="hibernate.archive.autodetection" value="class"/> -->
+
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<!-- <property name="hibernate.transaction.flush_before_completion" value="true" 
+				/> -->
+			<!-- <property name="hibernate.default_batch_fetch_size" value="16" /> 
+				<property name="hibernate.default_schema" value="dbidentfuncional" /> <property 
+				name="hibernate.temp.use_jdbc_metadata_defaults" value="false" /> -->
+		</properties>
+
+	</persistence-unit>
+</persistence>

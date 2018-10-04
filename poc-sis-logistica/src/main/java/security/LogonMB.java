@@ -24,7 +24,11 @@ public class LogonMB implements Serializable{
 
 	@Inject
 	FacesContext facesContext;
-
+	
+/*	@Stateful
+	 @PersistenceContext(unitName = "logistica", type = PersistenceContextType.EXTENDED)
+	    private EntityManager entityManager;*/
+	
 	private User user;
 	
 	private Integer matricula;
@@ -33,6 +37,10 @@ public class LogonMB implements Serializable{
 	public String logon() {
 		
 		user = new User(matricula, senha);
+		
+/*		UserDAO userDao = new UserDAO();
+		
+		userDao.salvar(user);*/
 		
 		if(user.getMatricula().equals(111) && user.getSenha().equals("111")) {
 			

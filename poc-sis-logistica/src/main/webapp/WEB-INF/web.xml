@@ -31,10 +31,14 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>admin</param-value>
 	</context-param>
-<!-- 	<servlet>
+	<servlet>
 		<servlet-name>facesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-	</servlet> -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>facesServlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
 	<error-page>
 		<error-code>403</error-code>
 		<location>/error/403.xhtml</location>
