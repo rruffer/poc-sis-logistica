@@ -45,7 +45,7 @@ public class LogonMB implements Serializable{
 		if(user.getMatricula().equals(111) && user.getSenha().equals("111")) {
 			
 			try {
-				facesContext.getCurrentInstance().getExternalContext().redirect("/sis-logistica/restricted/index.xhtml");
+				facesContext.getCurrentInstance().getExternalContext().redirect("/sis-logistica-0.0.2/restricted/index.xhtml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

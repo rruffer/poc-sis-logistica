@@ -9,17 +9,17 @@
 
 
 		<description>Peristence Unit</description>
-		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-		<!-- <jta-data-source>jdbc/LOGISTICA-DB</jta-data-source> -->
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/LOGISTICA-DS</jta-data-source>
 
 		<properties>
-			<property name="javax.persistence.jdbc.driver"
+<!-- 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://192.168.99.100/dblogistica" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password"
-				value="root" />
+				value="root" /> -->
 
 			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> <property 
 				name="hibernate.connection.url" value="jdbc:mysql://192.168.99.100/dblogistica"/> 
