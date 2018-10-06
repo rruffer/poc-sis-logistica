@@ -1,30 +1,35 @@
 package dao;
 
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import model.User;
-import util.JpaDAO;
 
-public class UserDAO extends JpaDAO<User> {
-	public UserDAO() {
-	}
+public class UserDAO extends AbstractDAO<User, Integer> {
 
-	public UserDAO(EntityManager manager) {
-		super(manager);
-	}
-
-	public User lerPorLogin(String login) {
-		Query consulta = getEntityManager().createQuery("from Usuer u where u.login = :login");
-		consulta.setParameter("login", login);
-		User resultado;
+	private static final long serialVersionUID = -6982233927213571947L;
+	
+	/**
+	 * 
+	 * @param matricula
+	 * @param senha
+	 * @return
+	 */
+	public User buscarUsuario(int matricula, String senha) {
+		
 		try {
-			resultado = (User) consulta.getSingleResult();
+		TypedQuery<User> query = entityManager().createNamedQuery(User.SEARCH_USER, User.class);
+		query.setParameter("matricula", matricula);
+		query.setParameter("senha", senha);
+		
+		return query.getSingleResult();
+		
 		} catch (NoResultException e) {
-			resultado = null;
+			// TODO: handle exception
 		}
-
-		return resultado;
+		
+		return null;
+		
 	}
+
 }
