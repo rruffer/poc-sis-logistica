@@ -8,8 +8,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.TypedQuery;
 
+import dao.UserDAO;
 import model.User;
+import util.UtilJSF;
 
 /**
  * @link https://arjan-tijms.omnifaces.org/p/jsf-23.html
@@ -18,50 +21,46 @@ import model.User;
  */
 @Named("logonMB")
 @SessionScoped
-public class LogonMB implements Serializable{
-	
+public class LogonMB implements Serializable {
+
 	private static final long serialVersionUID = 5993653751816846078L;
 
 	@Inject
 	FacesContext facesContext;
-	
-/*	@Stateful
-	 @PersistenceContext(unitName = "logistica", type = PersistenceContextType.EXTENDED)
-	    private EntityManager entityManager;*/
-	
+
+	@Inject
+	private UserDAO userDAO;
+
 	private User user;
-	
+
 	private Integer matricula;
 	private String senha;
 
 	public String logon() {
-		
-		user = new User(matricula, senha);
-		
-/*		UserDAO userDao = new UserDAO();
-		
-		userDao.salvar(user);*/
-		
-		if(user.getMatricula().equals(111) && user.getSenha().equals("111")) {
-			
-			try {
-				facesContext.getCurrentInstance().getExternalContext().redirect("/sis-logistica-0.0.2/restricted/index.xhtml");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}else {
-			
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário não existe", null);
-			facesContext.getCurrentInstance().addMessage(null, message);
-			user = null;
+
+		user = userDAO.buscarUsuario(matricula, senha);
+
+		if (user != null) {
+
+			UtilJSF.redirecionar("/logistica/restricted/index.xhtml");
+			UtilJSF.msgInformacao("Usuário logado com sucesso!");
+
+		} else {
+
+			UtilJSF.msgAlerta("Usuário não existe");
 		}
-		
+
 		return null;
 	}
-	
-	
+
+	public String login() {
+
+		user = null;
+		UtilJSF.redirecionar("/logistica/login.xhtml");
+
+		return null;
+	}
+
 	public Integer getMatricula() {
 		return matricula;
 	}
@@ -78,11 +77,9 @@ public class LogonMB implements Serializable{
 		this.senha = senha;
 	}
 
-
 	public User getUser() {
 		return user;
 	}
-
 
 	public void setUser(User user) {
 		this.user = user;

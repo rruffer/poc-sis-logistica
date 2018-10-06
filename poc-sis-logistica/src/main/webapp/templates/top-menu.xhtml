@@ -6,9 +6,9 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <!-- Logo -->
-<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-	<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-	<span class="logo-lg"><b>Admin</b>LTE</span>
+<a href="index.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+	<span class="logo-mini"><b>L</b></span> <!-- logo for regular state and mobile devices -->
+	<span class="logo-lg"><b>Logitech</b></span>
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
@@ -231,10 +231,10 @@
                 <li class="user-footer">
                     <h:form prependId="false">
                         <div class="pull-left">
-                            <p:commandLink  styleClass="btn btn-danger"  value="Change password"/>
+                            <p:commandLink  styleClass="btn btn-danger"  value="Mudar senha"/>
                         </div>
                         <div class="pull-right">
-                            <p:commandLink id="logout"   title="Logoff">
+                            <p:commandLink id="logout"  title="Logoff" action="#{logonMB.login()}">
                                 <i class="fa fa-sign-out fa-2x"></i>
                             </p:commandLink>
                         </div>
@@ -242,8 +242,8 @@
                 </li>
             </ul></li>
 			<!-- Control Sidebar Toggle Button -->
-			<li><a href="#" data-toggle="control-sidebar"><i
-					class="fa fa-gears"></i></a></li>
+<!-- 			<li><a href="#" data-toggle="control-sidebar"><i
+					class="fa fa-gears"></i></a></li> -->
 		</ul>
 	</div>
 </nav>

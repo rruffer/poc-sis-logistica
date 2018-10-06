@@ -6,7 +6,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 /**
  *
- * @author hantsy
+ * @author rruffer
  */
 @Dependent
 public class Resources {

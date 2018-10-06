@@ -5,18 +5,7 @@
 
 	<h:head>
 	
-	        <title>Admin Faces</title>
-       <!--  <link rel="shortcut icon" type="image/x-icon" href="#{resource['favicon/favicon.ico']}"/> -->
-
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <!-- <h:outputStylesheet library="css" name="prism.css"/> -->
-		
-		        <meta name="theme-color" content="#444"/>
-
- <title>Admin Starter</title>
+ <title>Logistica Logitech</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -24,6 +13,7 @@
         <meta name="theme-color" content="#444"/>
         <meta name="mobile-web-app-capable" content="yes"/>
 
+        <!-- <h:outputScript library="js" name="admintemplate.js" target="head"/> -->
         <style type="text/css">
 
             /* below css hides growls in small screens and makes messages visible */
@@ -80,23 +70,23 @@
 
         <div class="login-box">
             <div class="login-logo">
-                <p:link href="index.xhtml"><b>Admin</b>Starter</p:link>
+                <p:link href="#"><b>Logistica</b> Logitech</p:link>
             </div>
             <!-- /.login-logo -->
             <div class="box login-box-body">
                 <h:form>
-                    <p class="login-box-msg">Sign in to start your session</p>
+                    <p class="login-box-msg">Entre para iniciar sua sessão</p>
                     <p:messages closable="true"/>
 
                     <div class="form-group has-feedback">
-                        <p:inputText value="#{logonMB.matricula}" type="number" styleClass="form-control" placeholder="Just type any value"
+                        <p:inputText value="#{logonMB.matricula}" type="number" styleClass="form-control" placeholder="Informe a matrícula"
                                      required="true"
                                      requiredMessage="Matrícula é obrigatório."/>
-                        <i class="fa fa-envelope form-control-feedback" ></i>
+                        <i class="fa fa-user form-control-feedback" style="font-size: 18px"></i>
                     </div>
                     <div class="form-group has-feedback">
                         <p:inputText value="#{logonMB.senha}" type="password" styleClass="form-control"
-                                     placeholder="Just type any value" required="true"
+                                     placeholder="Informe a senha" required="true"
                                      requiredMessage="Senha é obrigatório."/>
                         <i class="fa fa-lock form-control-feedback" style="font-size: 18px"></i>
                     </div>
@@ -112,25 +102,10 @@
                     </div>
                 </h:form>
 
-                <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i
-                            class="fa fa-facebook"></i> Sign in using
-                        Facebook</a>
-                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i
-                            class="fa fa-google-plus"></i> Sign in using
-                        Google+</a>
-                </div>
-                <!-- /.social-auth-links -->
-
-                <a href="#">I forgot my password</a><br/>
-                <a href="#" class="text-center">Register a new membership</a>
-
             </div>
             <!-- /.login-box-body -->
         </div>
         
-        <h:outputScript library="js" name="admintemplate.js" target="head"/>
 
     </h:body>
 

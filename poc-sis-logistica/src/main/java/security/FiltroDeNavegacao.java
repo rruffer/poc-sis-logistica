@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
+import util.UtilJSF;
 
 @WebFilter(urlPatterns={"/restricted/*", "/faces/*"})
 public class FiltroDeNavegacao implements Filter{
@@ -25,27 +26,21 @@ public class FiltroDeNavegacao implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		System.out.println("Passei!!!");
-		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
-		System.out.println(req.getRequestURL());
 //		System.out.println(req.getServletPath()); 
 		
 		User usuario = logon.getUser();
-		//User usuario = login != null ? login.getUser():null;
 		
 		if(usuario == null){
 			
 			res.sendRedirect(req.getContextPath() + "/login.xhtml");
+			UtilJSF.msgAlerta("Efetue o login para navegar no sistema!");
 			
 			return;
 			
 		}else{
-			
-//			String pagina = req.getServletPath().replace("/restricted/", "");
-			
 			
 			chain.doFilter(request, response);
 			
