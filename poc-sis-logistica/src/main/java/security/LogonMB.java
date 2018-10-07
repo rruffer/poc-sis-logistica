@@ -42,7 +42,7 @@ public class LogonMB implements Serializable {
 
 		if (user != null) {
 
-			UtilJSF.redirecionar("/logistica/restricted/index.xhtml");
+			UtilJSF.redirecionar("/logistica/pages/private/index.xhtml");
 			UtilJSF.msgInformacao("Usuário logado com sucesso!");
 
 		} else {
@@ -56,7 +56,7 @@ public class LogonMB implements Serializable {
 	public String login() {
 
 		user = null;
-		UtilJSF.redirecionar("/logistica/login.xhtml");
+		UtilJSF.redirecionar("/logistica/pages/public/login.xhtml");
 
 		return null;
 	}

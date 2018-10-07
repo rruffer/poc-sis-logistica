@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
-import util.UtilJSF;
 
-@WebFilter(urlPatterns={"/restricted/*", "/faces/*"})
+//@WebFilter(urlPatterns={"/restricted/*", "/faces/*"})
+@WebFilter("/pages/private/*")
 public class FiltroDeNavegacao implements Filter{
 	
 	@Inject
@@ -35,8 +35,7 @@ public class FiltroDeNavegacao implements Filter{
 		
 		if(usuario == null){
 			
-			res.sendRedirect(req.getContextPath() + "/login.xhtml");
-			UtilJSF.msgAlerta("Efetue o login para navegar no sistema!");
+			res.sendRedirect(req.getContextPath() + "/pages/public/login.xhtml");
 			
 			return;
 			
