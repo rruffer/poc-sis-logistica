@@ -59,6 +59,11 @@ public class ServiceSolicitacao {
 		solicitacao.setDateEntrega(solicitacaoDTO.getDateEntrega());
 		solicitacao.setEndEntrega(solicitacaoDTO.getEndEntrega());
 		solicitacao.setDateCadastro(LocalDateTime.now());
+		solicitacao.setNatureza(solicitacaoDTO.getNatureza());
+		solicitacao.setEspecie(solicitacaoDTO.getEspecie());
+		solicitacao.setQuantidade(solicitacaoDTO.getQuantidade());
+		solicitacao.setPeso(solicitacaoDTO.getPeso());
+		solicitacao.setObservacao(solicitacaoDTO.getObservacao());
 //		solicitacao.setDateCadastro(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 		
 		dao.save(solicitacao);
