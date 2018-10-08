@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/layout.xhtml">
+
+	<ui:define name="title">
+		Expedição
+	</ui:define>
+
+	<ui:define name="description">
+		definições de expedição
+	</ui:define>
+
+	<ui:define name="body">
+
+			<p:panel header="Coletas" styleClass="card no-border"
+				toggleable="true" toggleSpeed="300">
+				<h:form id="form">
+					<p:growl id="msgs" showDetail="true" />
+
+					<p:dataTable id="sol" var="solicitacao"
+						value="#{controleDeEventosMB.listaSolicitacoes}"
+						style="margin-bottom:20px" reflow="true">
+						<f:facet name="header">
+                        Lista de solicitações
+                    </f:facet>
+
+						<!--                     <p:ajax event="rowEdit" listener="#{datatableEditMB.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{datatableEditMB.onRowCancel}" update=":form:msgs" /> -->
+
+						<p:column headerText="Id">
+							<h:outputText value="#{solicitacao.id}" />
+						</p:column>
+						<p:column headerText="Cliente">
+							<h:outputText value="#{solicitacao.cliente.razaoSocial}" />
+						</p:column>
+						<p:column headerText="Data coleta">
+							<h:outputText value="#{solicitacao.dateColeta}">
+							<f:convertDateTime type="localDate" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Endereço coleta">
+							<h:outputText value="#{solicitacao.endColeta}" />
+						</p:column>
+						<p:column headerText="Data entrega">
+							<h:outputText value="#{solicitacao.dateEntrega}" >
+							<f:convertDateTime type="localDate" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Endereço entrega">
+							<h:outputText value="#{solicitacao.endEntrega}" />
+						</p:column>
+						<p:column headerText="Data cadastro">
+							<h:outputText value="#{solicitacao.dateCadastro}" >
+							<f:convertDateTime type="localDate" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Situação">
+							<h:outputText styleClass="#{solicitacao.status == 'RECEBIDO' ? 'label bg-green':'label bg-red'}" value="#{solicitacao.status.descricao}"/>
+						</p:column>
+
+						<!-- <p:column headerText="Year">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{car.year}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar value="#{car.year}" pattern="yyyy" showOn="both"
+										yearRange="c-60:c+0" navigator="true" label="Year">
+										<f:converter converterId="calendarYearConverter" />
+									</p:calendar>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Brand">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{car.brand}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu value="#{car.brand}">
+										<f:selectItems value="#{datatableEditMB.brands}" var="man"
+											itemLabel="#{man}" itemValue="#{man}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Color">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{car.color}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu value="#{car.color}">
+										<f:selectItems value="#{datatableEditMB.colors}" var="color"
+											itemLabel="#{color}" itemValue="#{color}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column style="width:40px">
+							<p:rowEditor />
+						</p:column> -->
+					</p:dataTable>
+				</h:form>
+	</p:panel>					
+
+	</ui:define>
+
+
+
+</ui:composition>

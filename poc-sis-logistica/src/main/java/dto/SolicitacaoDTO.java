@@ -1,40 +1,50 @@
 package dto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import enums.StatusSolicitacao;
 import io.swagger.annotations.ApiModelProperty;
 
-public class SolicitacaoDTO implements Serializable {
-
-	private static final long serialVersionUID = 3690495669934828690L;
+public class SolicitacaoDTO {
 
 	@ApiModelProperty(hidden = true)
 	private Long id;
 
+	@ApiModelProperty(required=true, allowEmptyValue=false)
 	private ClienteDTO cliente;
 
+	@ApiModelProperty(required=true)
 	private LocalDateTime dateColeta;
 
-/*	@ManyToOne
-	@JoinColumn(name = "ID_ENDERECO_COLETA")
-	private Endereco endColeta;*/
+	@ApiModelProperty(required=true)
+	private String endColeta;
 
+	@ApiModelProperty(required=false)
 	private LocalDateTime dateEntrega;
 
-/*	@ManyToOne
-	@JoinColumn(name = "ID_ENDERECO_ENTREGA")
-	private Endereco endEntrega;*/
+	@ApiModelProperty(required=true)
+	private String endEntrega;
 
+	@ApiModelProperty(hidden = true)
 	private LocalDateTime dateCadastro;
+	
+	@ApiModelProperty(hidden = true)
+	private StatusSolicitacao status;
+	
+	@ApiModelProperty(required=true)
+	private String natureza;
+	
+	@ApiModelProperty(required=true)
+	private String especie;
+	
+	@ApiModelProperty(required=true)
+	private Integer quantidade;
+	
+	@ApiModelProperty(required=true)
+	private Double peso;
+
+	@ApiModelProperty(required=false)
+	private String observacao;
 
 	/**
 	 * @return the id
@@ -78,19 +88,19 @@ public class SolicitacaoDTO implements Serializable {
 		this.dateColeta = dateColeta;
 	}
 
-/*	*//**
+	/**
 	 * @return the endColeta
-	 *//*
-	public Endereco getEndColeta() {
+	 */
+	public String getEndColeta() {
 		return endColeta;
 	}
 
-	*//**
+	/**
 	 * @param endColeta the endColeta to set
-	 *//*
-	public void setEndColeta(Endereco endColeta) {
+	 */
+	public void setEndColeta(String endColeta) {
 		this.endColeta = endColeta;
-	}*/
+	}
 
 	/**
 	 * @return the dateEntrega
@@ -106,19 +116,19 @@ public class SolicitacaoDTO implements Serializable {
 		this.dateEntrega = dateEntrega;
 	}
 
-/*	*//**
+	/**
 	 * @return the endEntrega
-	 *//*
-	public Endereco getEndEntrega() {
+	 */
+	public String getEndEntrega() {
 		return endEntrega;
 	}
 
-	*//**
+	/**
 	 * @param endEntrega the endEntrega to set
-	 *//*
-	public void setEndEntrega(Endereco endEntrega) {
+	 */
+	public void setEndEntrega(String endEntrega) {
 		this.endEntrega = endEntrega;
-	}*/
+	}
 
 	/**
 	 * @return the dateCadastro
@@ -135,35 +145,73 @@ public class SolicitacaoDTO implements Serializable {
 	}
 
 	/**
-	 * @return the serialversionuid
+	 * @return the natureza
 	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getNatureza() {
+		return natureza;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	/**
+	 * @param natureza the natureza to set
+	 */
+	public void setNatureza(String natureza) {
+		this.natureza = natureza;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SolicitacaoDTO other = (SolicitacaoDTO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	/**
+	 * @return the especie
+	 */
+	public String getEspecie() {
+		return especie;
+	}
+
+	/**
+	 * @param especie the especie to set
+	 */
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	/**
+	 * @return the quantidade
+	 */
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	/**
+	 * @param quantidade the quantidade to set
+	 */
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	/**
+	 * @return the peso
+	 */
+	public Double getPeso() {
+		return peso;
+	}
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao() {
+		return observacao;
+	}
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@Override

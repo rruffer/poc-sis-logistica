@@ -1,8 +1,9 @@
 package rest;
 
+import java.time.LocalDateTime;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,56 +11,58 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.SolicitacaoDAO;
+import dto.SolicitacaoDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import model.Cliente;
 import model.Solicitacao;
 
+@Stateless
 @Path("/solicitacao")
 @Api(value = "Solicitacao")
-@Stateless
 public class ServiceSolicitacao {
 
 	@Inject
 	private SolicitacaoDAO dao;
-
-
-/*	@DELETE
-	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-	@ApiOperation(value = "Excluir solicitação por ID")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Solicitação removida com sucesso"),
-			@ApiResponse(code = 204, message = "Nenhum conteúdo") })
-	public Response excluir(@PathParam("id") Long id) {
-		Response response = Response.status(204).entity("Solicitação não encontrada").build();
-		
-		Solicitacao solicitacao = dao.find(id);
-
-		if (solicitacao != null) {
-			dao.remove(solicitacao);
-			response = Response.status(200).entity(solicitacao).build();
-		}
-
-		return response;
-	}*/
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 	@ApiOperation(value = "Receber solicitação")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Solicitação recebida"),
 			@ApiResponse(code = 500, message = "Erro interno no servidor") })
-	public Response receberSolicitacao(Solicitacao solicitacao) {
+	public Response receberSolicitacao(SolicitacaoDTO solicitacaoDTO) {
 
 		try {
 
-			dao.save(solicitacao);
+			salvarSolicitacao(solicitacaoDTO);
 
-		} catch (NoResultException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(201).entity(solicitacao).build();
+		return Response.status(201).entity(solicitacaoDTO).build();
+	}
+	
+	private void salvarSolicitacao(SolicitacaoDTO solicitacaoDTO) throws Exception{
+		
+		Solicitacao solicitacao = new Solicitacao();
+		
+		Cliente cliente = new Cliente();
+		cliente.setId(solicitacaoDTO.getCliente().getId());
+		new Cliente().setId(solicitacaoDTO.getCliente().getId());
+		
+		solicitacao.setCliente(cliente);
+		solicitacao.setDateColeta(solicitacaoDTO.getDateColeta());
+		solicitacao.setEndColeta(solicitacaoDTO.getEndColeta());
+		solicitacao.setDateEntrega(solicitacaoDTO.getDateEntrega());
+		solicitacao.setEndEntrega(solicitacaoDTO.getEndEntrega());
+		solicitacao.setDateCadastro(LocalDateTime.now());
+//		solicitacao.setDateCadastro(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+		
+		dao.save(solicitacao);
+		
 	}
 
 }

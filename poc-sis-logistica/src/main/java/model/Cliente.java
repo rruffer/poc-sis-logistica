@@ -7,10 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Cliente implements Serializable {
@@ -22,32 +18,24 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ApiModelProperty(hidden = true)
 	@Column(name="RAZAO_SOCIAL")
 	private String razaoSocial;
 	
-	@ApiModelProperty(hidden = true)
-	@ManyToOne
-	@JoinColumn(name="ENDERECO_ID")
-	private Endereco endereco;
+	@Column(name="ENDERECO_ID")
+	private String endereco;
 	
-	@ApiModelProperty(hidden = true)
 	@Column(name="TELEFONE")
 	private String telefone;
 	
-	@ApiModelProperty(hidden = true)
 	@Column(name="CNPJ")
 	private String cnpj;
 	
-	@ApiModelProperty(hidden = true)
 	@Column(name="INSC_ESTADUAL")
 	private String inscEstadual;
 	
-	@ApiModelProperty(hidden = true)
 	@Column(name="INSC_MUNICIPAL")
 	private String inscMunicipal;
 	
-	@ApiModelProperty(hidden = true)
 	@Column(name="EMAIL")
 	private String email;
 
@@ -82,14 +70,14 @@ public class Cliente implements Serializable {
 	/**
 	 * @return the endereco
 	 */
-	public Endereco getEndereco() {
+	public String getEndereco() {
 		return endereco;
 	}
 
 	/**
 	 * @param endereco the endereco to set
 	 */
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 

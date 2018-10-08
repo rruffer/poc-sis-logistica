@@ -5,13 +5,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import io.swagger.annotations.ApiModelProperty;
+import enums.StatusSolicitacao;
 
 @Entity
 public class Solicitacao implements Serializable {
@@ -21,7 +24,6 @@ public class Solicitacao implements Serializable {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@ApiModelProperty(hidden = true)
 	private Long id;
 
 	@ManyToOne
@@ -31,20 +33,37 @@ public class Solicitacao implements Serializable {
 	@Column
 	private LocalDateTime dateColeta;
 
-/*	@ManyToOne
-	@JoinColumn(name = "ID_ENDERECO_COLETA")
-	private Endereco endColeta;*/
+	@Column(name = "ID_ENDERECO_COLETA")
+	private String endColeta;
 
 	@Column
 	private LocalDateTime dateEntrega;
 
-/*	@ManyToOne
-	@JoinColumn(name = "ID_ENDERECO_ENTREGA")
-	private Endereco endEntrega;*/
+	@Column(name = "ID_ENDERECO_ENTREGA")
+	private String endEntrega;
 
 	@Column
 	private LocalDateTime dateCadastro;
-
+	
+	@Enumerated(EnumType.STRING)
+	private StatusSolicitacao status;
+	
+	@Column
+	private String natureza;
+	
+	@Column
+	private String especie;
+	
+	@Column
+	private Integer quantidade;
+	
+	@Column
+	private Double peso;
+	
+	@Lob
+	@Column
+	private String observacao;
+	
 	/**
 	 * @return the id
 	 */
@@ -87,19 +106,19 @@ public class Solicitacao implements Serializable {
 		this.dateColeta = dateColeta;
 	}
 
-/*	*//**
+	/**
 	 * @return the endColeta
-	 *//*
-	public Endereco getEndColeta() {
+	 */
+	public String getEndColeta() {
 		return endColeta;
 	}
 
-	*//**
+	/**
 	 * @param endColeta the endColeta to set
-	 *//*
-	public void setEndColeta(Endereco endColeta) {
+	 */
+	public void setEndColeta(String endColeta) {
 		this.endColeta = endColeta;
-	}*/
+	}
 
 	/**
 	 * @return the dateEntrega
@@ -115,19 +134,19 @@ public class Solicitacao implements Serializable {
 		this.dateEntrega = dateEntrega;
 	}
 
-/*	*//**
+	/**
 	 * @return the endEntrega
-	 *//*
-	public Endereco getEndEntrega() {
+	 */
+	public String getEndEntrega() {
 		return endEntrega;
 	}
 
-	*//**
+	/**
 	 * @param endEntrega the endEntrega to set
-	 *//*
-	public void setEndEntrega(Endereco endEntrega) {
+	 */
+	public void setEndEntrega(String endEntrega) {
 		this.endEntrega = endEntrega;
-	}*/
+	}
 
 	/**
 	 * @return the dateCadastro
@@ -141,6 +160,90 @@ public class Solicitacao implements Serializable {
 	 */
 	public void setDateCadastro(LocalDateTime dateCadastro) {
 		this.dateCadastro = dateCadastro;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public StatusSolicitacao getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusSolicitacao status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the natureza
+	 */
+	public String getNatureza() {
+		return natureza;
+	}
+
+	/**
+	 * @param natureza the natureza to set
+	 */
+	public void setNatureza(String natureza) {
+		this.natureza = natureza;
+	}
+
+	/**
+	 * @return the especie
+	 */
+	public String getEspecie() {
+		return especie;
+	}
+
+	/**
+	 * @param especie the especie to set
+	 */
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	/**
+	 * @return the quantidade
+	 */
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	/**
+	 * @param quantidade the quantidade to set
+	 */
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	/**
+	 * @return the peso
+	 */
+	public Double getPeso() {
+		return peso;
+	}
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao() {
+		return observacao;
+	}
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	/**

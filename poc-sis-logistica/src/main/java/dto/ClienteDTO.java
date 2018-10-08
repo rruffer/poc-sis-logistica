@@ -3,19 +3,19 @@ package dto;
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
-import model.Endereco;
 
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 4857789627021900180L;
 
+	@ApiModelProperty(required=true)
 	private Long id;
 
 	@ApiModelProperty(hidden = true)
 	private String razaoSocial;
 	
-/*	@ApiModelProperty(hidden = true)
-	private Endereco endereco;*/
+	@ApiModelProperty(hidden = true)
+	private String endereco;
 	
 	@ApiModelProperty(hidden = true)
 	private String telefone;
@@ -60,19 +60,19 @@ public class ClienteDTO implements Serializable {
 		this.razaoSocial = razaoSocial;
 	}
 
-/*	*//**
+	/**
 	 * @return the endereco
-	 *//*
-	public Endereco getEndereco() {
+	 */
+	public String getEndereco() {
 		return endereco;
-	}*/
+	}
 
-/*	*//**
+	/**
 	 * @param endereco the endereco to set
-	 *//*
-	public void setEndereco(Endereco endereco) {
+	 */
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}*/
+	}
 
 	/**
 	 * @return the tel

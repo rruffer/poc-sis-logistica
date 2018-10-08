@@ -7,16 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 
-@Entity
-@NamedQueries({
-    @NamedQuery(name=User.SEARCH_USER,
-                query="SELECT s FROM User s where s.matricula = :matricula and s.senha = :senha"),
 
-})
+@NamedQuery(name=User.SEARCH_USER, query="SELECT s FROM User s where s.matricula = :matricula and s.senha = :senha")
+@Entity
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 738209758338926043L;
@@ -29,21 +25,17 @@ public class User implements Serializable{
 	private Integer id;
 	
 	@Column
+	private String nome;
+	
+	@Column
 	private Integer matricula;
 	
 	@Column
 	private String senha;
+
+	@Column
+	private String funcao;
 	
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public User(Integer matricula, String senha) {
-		this.matricula = matricula;
-		this.senha = senha;
-	}
-
-
 	/**
 	 * @return the id
 	 */
@@ -58,6 +50,20 @@ public class User implements Serializable{
 		this.id = id;
 	}
 	
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	/**
 	 * @return the matricula
 	 */
@@ -84,6 +90,20 @@ public class User implements Serializable{
 	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	/**
+	 * @return the funcao
+	 */
+	public String getFuncao() {
+		return funcao;
+	}
+
+	/**
+	 * @param funcao the funcao to set
+	 */
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}
 
 	/* (non-Javadoc)

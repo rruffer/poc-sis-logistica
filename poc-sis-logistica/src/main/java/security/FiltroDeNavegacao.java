@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import control.LogonMB;
 import model.User;
 
 //@WebFilter(urlPatterns={"/restricted/*", "/faces/*"})
