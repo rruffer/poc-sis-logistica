@@ -1,1 +1,1 @@
-# template-with-jsf-2.3
+# poc-sis-logistica
