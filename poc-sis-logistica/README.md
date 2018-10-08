@@ -1,6 +1,6 @@
 # poc-sis-logistica
 
-Os dados do sistema estão da pasta dump.
+Os dados do sistema estão na pasta dump.
 
 O usuário para se logar no sistema é matrícula 111 e senha 111.
 
