@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/layout.xhtml">
+
+	<ui:define name="title">
+		Relatórios
+	</ui:define>
+
+	<ui:define name="description">
+		geração de documentos
+	</ui:define>
+
+	<ui:define name="body">
+
+		<!-- status dialog ajax-->
+		<ui:include src="status.xhtml" />
+
+		<p:panel styleClass="card no-border" toggleSpeed="300">
+
+			<h:form>
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:panelGrid columns="2"
+					columnClasses="ui-grid-col-3,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+					layout="grid">
+
+					<p:outputLabel for="tipo-relatorio" value="Tipo de relatório" />
+					<p:selectOneMenu id="tipo-relatorio"
+						value="#{relatoriosMB.idRelatorio}">
+						<f:selectItem itemLabel="Todos" itemValue="0" />
+						<f:selectItem itemLabel="Expedidos" itemValue="1" />
+						<f:selectItem itemLabel="Pendentes" itemValue="2" />
+
+						<p:ajax event="change"
+							listener="#{relatoriosMB.filtrarSolicitacoes}" update="sol" />
+					</p:selectOneMenu>
+
+
+				</p:panelGrid>
+
+				<p:spacer />
+				<p:spacer />
+
+				<p:dataTable id="sol" var="solicitacao"
+					value="#{relatoriosMB.listaSolicitacoes}"
+					style="margin-bottom:20px" reflow="true"
+					
+					rendered="#{relatoriosMB.listaSolicitacoes != null}">
+					<f:facet name="header">
+                        Lista de solicitações
+                        <h:commandLink id="download-pdf" ajax="false" style="float: right"
+							onclick="PrimeFaces.monitorDownload(start, stop);">
+							<p:graphicImage library="img" name="icon-pdf.png" width="25px" />
+							<p:fileDownload value="#{relatoriosMB.arquivo}" /> 
+						</h:commandLink>
+						<p:tooltip id="toolTipFade" for="download-pdf"
+							value="Fazer download do relatório" position="left" />
+							
+							
+
+					</f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{solicitacao.id}" />
+					</p:column>
+					<p:column headerText="Cliente">
+						<h:outputText value="#{solicitacao.cliente.razaoSocial}" />
+					</p:column>
+					<p:column headerText="Data coleta">
+						<h:outputText value="#{solicitacao.dateColeta}">
+							<f:convertDateTime type="localDate" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Endereço coleta">
+						<h:outputText value="#{solicitacao.endColeta}" />
+					</p:column>
+					<p:column headerText="Data entrega">
+						<h:outputText value="#{solicitacao.dateEntrega}">
+							<f:convertDateTime type="localDate" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Endereço entrega">
+						<h:outputText value="#{solicitacao.endEntrega}" />
+					</p:column>
+					<p:column headerText="Data cadastro">
+						<h:outputText value="#{solicitacao.dateCadastro}">
+							<f:convertDateTime type="localDate" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Situação">
+						<h:outputText
+							styleClass="#{solicitacao.status == 'RECEBIDO' ? 'label bg-green':'label bg-red'}"
+							value="#{solicitacao.status.descricao}" />
+					</p:column>
+
+				</p:dataTable>
+
+
+
+
+			</h:form>
+		</p:panel>
+	<script type="text/javascript">
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+	</script>
+	</ui:define>
+
+
+
+</ui:composition>

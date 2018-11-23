@@ -13,13 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 import enums.StatusSolicitacao;
 
+@NamedQuery(name=Solicitacao.SEARCH_SOL, query="SELECT s FROM Solicitacao s where s.status = :status ")
 @Entity
 public class Solicitacao implements Serializable {
 
 	private static final long serialVersionUID = 3690495669934828690L;
+	public static final String SEARCH_SOL = "search_sol";
+
 
 	@Id
 	@Column
@@ -29,6 +33,10 @@ public class Solicitacao implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ID_CLIENTE")
 	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_MOTORISTA")
+	private Motorista motorista;
 
 	@Column
 	private LocalDateTime dateColeta;
@@ -244,6 +252,20 @@ public class Solicitacao implements Serializable {
 	 */
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	/**
+	 * @return the motorista
+	 */
+	public Motorista getMotorista() {
+		return motorista;
+	}
+
+	/**
+	 * @param motorista the motorista to set
+	 */
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
 	}
 
 	/**

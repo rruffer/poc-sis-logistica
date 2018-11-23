@@ -32,7 +32,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-				<!-- <warName>logistica</warName> -->
+					<!-- <warName>logistica</warName> -->
 					<archive>
 						<manifestEntries>
 							<version>${project.version}</version>
@@ -263,6 +263,20 @@
 			<groupId>com.github.gilberto-torrezan</groupId>
 			<artifactId>viacep</artifactId>
 			<version>1.2.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.5.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
 		</dependency>
 
 

@@ -6,109 +6,131 @@
 	template="/templates/layout.xhtml">
 
 	<ui:define name="title">
-		Expedição
+		Solicitações
 	</ui:define>
 
 	<ui:define name="description">
-		definições de expedição
+		solicitações dos clientes
 	</ui:define>
 
 	<ui:define name="body">
 
-			<p:panel header="Coletas" styleClass="card no-border"
-				toggleable="true" toggleSpeed="300">
-				<h:form id="form">
-					<p:growl id="msgs" showDetail="true" />
+		<p:panel header="Coletas" styleClass="card no-border"
+			toggleable="true" toggleSpeed="300">
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" />
 
-					<p:dataTable id="sol" var="solicitacao"
-						value="#{controleDeEventosMB.listaSolicitacoes}"
-						style="margin-bottom:20px" reflow="true">
-						<f:facet name="header">
+				<p:dataTable id="sol" var="solicitacao"
+					value="#{controleDeEventosMB.listaSolicitacoes}"
+					style="margin-bottom:20px" reflow="true">
+					<f:facet name="header">
                         Lista de solicitações
                     </f:facet>
 
-						<!--                     <p:ajax event="rowEdit" listener="#{datatableEditMB.onRowEdit}" update=":form:msgs" />
+					<!--                     <p:ajax event="rowEdit" listener="#{datatableEditMB.onRowEdit}" update=":form:msgs" />
                     <p:ajax event="rowEditCancel" listener="#{datatableEditMB.onRowCancel}" update=":form:msgs" /> -->
 
-						<p:column headerText="Id">
-							<h:outputText value="#{solicitacao.id}" />
-						</p:column>
-						<p:column headerText="Cliente">
-							<h:outputText value="#{solicitacao.cliente.razaoSocial}" />
-						</p:column>
-						<p:column headerText="Data coleta">
-							<h:outputText value="#{solicitacao.dateColeta}">
+					<p:column headerText="Id">
+						<h:outputText value="#{solicitacao.id}" />
+					</p:column>
+					<p:column headerText="Cliente">
+						<h:outputText value="#{solicitacao.cliente.razaoSocial}" />
+					</p:column>
+					<p:column headerText="Data coleta">
+						<h:outputText value="#{solicitacao.dateColeta}">
 							<f:convertDateTime type="localDate" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Endereço coleta">
-							<h:outputText value="#{solicitacao.endColeta}" />
-						</p:column>
-						<p:column headerText="Data entrega">
-							<h:outputText value="#{solicitacao.dateEntrega}" >
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Endereço coleta">
+						<h:outputText value="#{solicitacao.endColeta}" />
+					</p:column>
+					<p:column headerText="Data entrega">
+						<h:outputText value="#{solicitacao.dateEntrega}">
 							<f:convertDateTime type="localDate" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Endereço entrega">
-							<h:outputText value="#{solicitacao.endEntrega}" />
-						</p:column>
-						<p:column headerText="Data cadastro">
-							<h:outputText value="#{solicitacao.dateCadastro}" >
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Endereço entrega">
+						<h:outputText value="#{solicitacao.endEntrega}" />
+					</p:column>
+					<p:column headerText="Data cadastro">
+						<h:outputText value="#{solicitacao.dateCadastro}">
 							<f:convertDateTime type="localDate" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Situação">
-							<h:outputText styleClass="#{solicitacao.status == 'RECEBIDO' ? 'label bg-green':'label bg-red'}" value="#{solicitacao.status.descricao}"/>
-						</p:column>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Situação">
+						<h:outputText
+							styleClass="#{solicitacao.status == 'RECEBIDO' ? 'label bg-green':'label bg-red'}"
+							value="#{solicitacao.status.descricao}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandLink
+							actionListener="#{controleDeEventosMB.definirCarga(solicitacao)}"
+							oncomplete="PF('dlgSolicitacao').show();" update="@form, form-def-carga">
+							<i class="fa fa-check-square"> Definição de carga</i>
+						</p:commandLink>
+					</p:column>
 
-						<!-- <p:column headerText="Year">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{car.year}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:calendar value="#{car.year}" pattern="yyyy" showOn="both"
-										yearRange="c-60:c+0" navigator="true" label="Year">
-										<f:converter converterId="calendarYearConverter" />
-									</p:calendar>
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
+				</p:dataTable>
 
-						<p:column headerText="Brand">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{car.brand}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:selectOneMenu value="#{car.brand}">
-										<f:selectItems value="#{datatableEditMB.brands}" var="man"
-											itemLabel="#{man}" itemValue="#{man}" />
-									</p:selectOneMenu>
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
+			</h:form>
+		</p:panel>
 
-						<p:column headerText="Color">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{car.color}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:selectOneMenu value="#{car.color}">
-										<f:selectItems value="#{datatableEditMB.colors}" var="color"
-											itemLabel="#{color}" itemValue="#{color}" />
-									</p:selectOneMenu>
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
+		<!-- dialogo para definição de carga -->
+		<p:dialog id="dialog-def-carga" header="Definição da carga"
+			widgetVar="dlgSolicitacao" resizable="false" draggable="false"
+			appendTo="@(body)" responsive="true" width="400" modal="true"
+			styleClass="dialog-login">
+			<h:form id="form-def-carga">
+				<p:growl id="msg-dialog" />
+				<p:messages closable="true" />
+				<p:panelGrid id="panel-def-carga" columns="2" cellpadding="5"
+					layout="grid" styleClass="no-border ui-fluid">
+					<p:outputLabel for="especie" value="Espécie" />
+					<p:inputText id="especie"
+						value="#{controleDeEventosMB.solicitacao.especie}" required="true"
+						autocomplete="off" requiredMessage="Espécie é obrigatório"
+						label="especie" />
+					<p:outputLabel for="natureza" value="Natureza" />
+					<p:inputText id="natureza"
+						value="#{controleDeEventosMB.solicitacao.natureza}"
+						required="true" autocomplete="off"
+						requiredMessage="Natureza é obrigatório" label="natureza" />
+					<p:outputLabel for="quantidade" value="Quantidade" />
+					<p:inputText id="quantidade"
+						value="#{controleDeEventosMB.solicitacao.quantidade}"
+						required="true" requiredMessage="Quantidade é obrigatório"
+						autocomplete="off" label="quantidade" />
+					<p:outputLabel for="peso" value="Peso" />
+					<p:inputText id="peso"
+						value="#{controleDeEventosMB.solicitacao.peso}" required="true"
+						requiredMessage="Peso é obrigatório" autocomplete="off"
+						label="peso" />
+					<p:outputLabel for="observacao" value="Observação" />
+					<p:inputTextarea id="observacao"
+						value="#{controleDeEventosMB.solicitacao.observacao}"
+						autocomplete="off" label="observacao" autoResize="true" />
 
-						<p:column style="width:40px">
-							<p:rowEditor />
-						</p:column> -->
-					</p:dataTable>
-				</h:form>
-	</p:panel>					
+					<p:outputLabel for="motorista" value="Motorista" />
+					<p:selectOneMenu id="motorista"
+						value="#{controleDeEventosMB.idMotorista}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{controleDeEventosMB.selectMotorista}" />
+						<!-- <p:ajax listener=""/> -->
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<p:separator />
+				<p:button styleClass="btn-material pull-left" value="Fechar"
+					onclick="PF('dlgSolicitacao').hide();return false" />
+
+				<p:commandButton styleClass="btn-primary btn-material pull-right"
+					value="Salvar" update="@form"
+					action="#{controleDeEventosMB.salvarSolicitacao}"
+					icon="fa fa-floppy-o" />
+
+			</h:form>
+		</p:dialog>
 
 	</ui:define>
 
