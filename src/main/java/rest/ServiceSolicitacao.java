@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.modelmapper.ModelMapper;
+
 import dao.SolicitacaoDAO;
 import dto.SolicitacaoDTO;
 import io.swagger.annotations.Api;
@@ -26,6 +28,8 @@ public class ServiceSolicitacao {
 
 	@Inject
 	private SolicitacaoDAO dao;
+	
+	private ModelMapper mapper = new ModelMapper();
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
@@ -45,28 +49,35 @@ public class ServiceSolicitacao {
 		return Response.status(201).entity(solicitacaoDTO).build();
 	}
 	
-	private void salvarSolicitacao(SolicitacaoDTO solicitacaoDTO) throws Exception{
+	private void salvarSolicitacao(SolicitacaoDTO solicitacaoDTO) throws Exception {
 		
-		Solicitacao solicitacao = new Solicitacao();
 		
-		Cliente cliente = new Cliente();
-		cliente.setId(solicitacaoDTO.getCliente().getId());
-		new Cliente().setId(solicitacaoDTO.getCliente().getId());
+		Solicitacao solicitacao  = mapper.map(solicitacaoDTO, Solicitacao.class);
 		
-		solicitacao.setCliente(cliente);
-		solicitacao.setDateColeta(solicitacaoDTO.getDateColeta());
-		solicitacao.setEndColeta(solicitacaoDTO.getEndColeta());
-		solicitacao.setDateEntrega(solicitacaoDTO.getDateEntrega());
-		solicitacao.setEndEntrega(solicitacaoDTO.getEndEntrega());
-		solicitacao.setDateCadastro(LocalDateTime.now());
-		solicitacao.setNatureza(solicitacaoDTO.getNatureza());
-		solicitacao.setEspecie(solicitacaoDTO.getEspecie());
-		solicitacao.setQuantidade(solicitacaoDTO.getQuantidade());
-		solicitacao.setPeso(solicitacaoDTO.getPeso());
-		solicitacao.setObservacao(solicitacaoDTO.getObservacao());
+		/*
+		 * Solicitacao solicitacao = new Solicitacao();
+		 * 
+		 * Cliente cliente = new Cliente();
+		 * cliente.setId(solicitacaoDTO.getCliente().getId()); new
+		 * Cliente().setId(solicitacaoDTO.getCliente().getId());
+		 * 
+		 * solicitacao.setCliente(cliente);
+		 * solicitacao.setDateColeta(solicitacaoDTO.getDateColeta());
+		 * solicitacao.setEndColeta(solicitacaoDTO.getEndColeta());
+		 * solicitacao.setDateEntrega(solicitacaoDTO.getDateEntrega());
+		 * solicitacao.setEndEntrega(solicitacaoDTO.getEndEntrega());
+		 * solicitacao.setDateCadastro(LocalDateTime.now());
+		 * solicitacao.setNatureza(solicitacaoDTO.getNatureza());
+		 * solicitacao.setEspecie(solicitacaoDTO.getEspecie());
+		 * solicitacao.setQuantidade(solicitacaoDTO.getQuantidade());
+		 * solicitacao.setPeso(solicitacaoDTO.getPeso());
+		 * solicitacao.setObservacao(solicitacaoDTO.getObservacao());
+		 */
 //		solicitacao.setDateCadastro(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 		
 		dao.save(solicitacao);
+		
+		System.out.println();
 		
 	}
 
