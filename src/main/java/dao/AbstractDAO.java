@@ -35,8 +35,10 @@ public abstract class AbstractDAO<T, PK> implements Serializable {
 		classe = DetectClass.getEntityClass(getClass());
 	}
 
-	public void save(T object) {
+	public T save(T object) {
 		em.persist(object);
+		
+		return object;
 	}
 
 	public List<T> findAll() {
