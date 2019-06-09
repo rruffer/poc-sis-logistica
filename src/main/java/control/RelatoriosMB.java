@@ -1,8 +1,11 @@
 package control;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -43,13 +46,15 @@ public class RelatoriosMB implements Serializable {
 
 	@Inject
 	private SolicitacaoDAO solicitacaoDAO;
+	
+	@Inject
+	private Relatorios relatorios;
 
 	private List<Solicitacao> listaSolicitacoes;
 	private List<Solicitacao> listaTodasSolicitacoes;
 	private Integer idRelatorio;
 	private LocalDateTime dataInicial;
 	private LocalDateTime dataFinal;
-	private File file;
 	private StreamedContent arquivo;
 	private StatusSolicitacao status;
 	
@@ -90,7 +95,7 @@ public class RelatoriosMB implements Serializable {
 	/**
 	 * Grava alterações da solicitação na base de dados
 	 */
-	public void gerarRelatorioExpedicao() {
+	public void gerarRelatorioExpedicao()  {
 		
 		List<SolicitacaoRel> listSolRel = new ArrayList<>();
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -115,14 +120,11 @@ public class RelatoriosMB implements Serializable {
 		}
 
 		String nomeRelatorio = "relatorio_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".pdf";
-		this.file = Relatorios.relatorioExpedicao(listSolRel, nomeRelatorio, status);
+//		this.file = Relatorios.relatorioExpedicao(listSolRel, nomeRelatorio, status);
+//		ByteArrayOutputStream outputStream = Relatorios.relatorioExpedicao(listSolRel, status);
+		InputStream inputStream = relatorios.relatorioExpedicao(listSolRel, status);
 		
-		try {
-			arquivo = new DefaultStreamedContent(new FileInputStream(file), "application/pdf", file.getName());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		arquivo = new DefaultStreamedContent(inputStream, "application/pdf", nomeRelatorio);
 		
 	}
 	

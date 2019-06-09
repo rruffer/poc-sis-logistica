@@ -1,28 +1,34 @@
 package relatorios;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+
+import org.jboss.logging.Logger;
 
 import enums.StatusSolicitacao;
-import model.Solicitacao;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import util.UtilJSF;
 
+@Local
+@Stateless
 public class Relatorios {
+	
+	private Logger log = Logger.getLogger(Relatorios.class);
 
-	public static File relatorioExpedicao(List<SolicitacaoRel> listaSolicitacoes, String nomeArquivo, StatusSolicitacao status) {
 
-		File file = null;
-		
+	public ByteArrayInputStream relatorioExpedicao(List<SolicitacaoRel> listaSolicitacoes, StatusSolicitacao status) {
+
 		try {
 
 
@@ -37,36 +43,69 @@ public class Relatorios {
 			
 			parametros.put("tipoRelatorio", "Relatório de OS " + statusDescricao);
 			
-			file = new File(UtilJSF.pastaRaiz().getRealPath("///relatorios//"));
-			
-			if(!file.isDirectory()) {
-				file.mkdir();
-			}
+//			String caminhoJasper = getFile("/relatorios/relatorio-expedicao.jasper").getAbsolutePath();
+		    InputStream caminhoJasper = this.getClass().getClassLoader().getResourceAsStream("relatorios/relatorio-expedicao.jasper");
 
-			String caminhoRelatorio = UtilJSF.pastaRaiz().getRealPath("///relatorios//") + "//" +  nomeArquivo;
-			file = new File(caminhoRelatorio);
-			
-			if(file.exists()) {
-				file.delete();
-			}
-			
-			String caminhoJasper = getFile("/relatorios/relatorio-expedicao.jasper").getAbsolutePath();
 			JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listaSolicitacoes);
 			JasperPrint arquivo = JasperFillManager.fillReport(caminhoJasper, parametros, ds);
 
-			JasperExportManager.exportReportToPdfFile(arquivo, caminhoRelatorio);
+		    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		    JasperExportManager.exportReportToPdfStream(arquivo, outputStream);
 			
-			file = new File(caminhoRelatorio);
-
+			return new ByteArrayInputStream(outputStream.toByteArray());
 
 		} catch (Exception e) {
-
-			e.printStackTrace();
-
+			log.error("Erro ao gerar relatório");
 		}
 		
-		return file;
+		return null;
 
+	}
+	
+	public ByteArrayInputStream relatorioTeste() {
+		
+		try {
+			
+			
+			List<AvaliacaoDesempenhoRelatorio> listaSolicitacoes = listaSolicitacoes();
+			
+			//parâmetros
+			//ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			//InputStream inputStream = ec.getResourceAsStream("/resources/images/topoRelatorioValid.jpg");
+			Map<String, Object> parametros = new HashMap<String, Object>();
+			//parametros.put("logo", inputStream);
+			parametros.put("nmSistema", "Logística Logitech");
+			
+			String statusDescricao = "Todos";
+			
+			parametros.put("tipoRelatorio", "Relatório de OS " + statusDescricao);
+			
+//			String caminhoJasper = getFile("/relatorios/relatorio-expedicao.jasper").getAbsolutePath();
+			InputStream caminhoJasper = this.getClass().getClassLoader().getResourceAsStream("relatorios/avaliacaoDesempenho.jasper");
+			
+			JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listaSolicitacoes);
+			JasperPrint arquivo = JasperFillManager.fillReport(caminhoJasper, parametros, ds);
+			
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			JasperExportManager.exportReportToPdfStream(arquivo, outputStream);
+			
+			return new ByteArrayInputStream(outputStream.toByteArray());
+			
+		} catch (Exception e) {
+			log.error("Erro ao gerar relatório");
+		}
+		
+		return null;
+		
+	}
+	
+	private List<AvaliacaoDesempenhoRelatorio> listaSolicitacoes() {
+		
+		List<AvaliacaoDesempenhoRelatorio> listaSolicitacoes = new ArrayList<>();
+		listaSolicitacoes.add(new AvaliacaoDesempenhoRelatorio("Teste1", 100));
+		listaSolicitacoes.add(new AvaliacaoDesempenhoRelatorio("Teste2", 50));
+		
+		return listaSolicitacoes;
 	}
 	
 	private static File getFile(String fileName) {
