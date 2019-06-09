@@ -55,7 +55,6 @@ public class RelatoriosMB implements Serializable {
 	private Integer idRelatorio;
 	private LocalDateTime dataInicial;
 	private LocalDateTime dataFinal;
-	private StreamedContent arquivo;
 	private StatusSolicitacao status;
 	
 	@PostConstruct
@@ -72,17 +71,17 @@ public class RelatoriosMB implements Serializable {
 		case 0:
 			status = null;
 			listaSolicitacoes = listaTodasSolicitacoes;
-			gerarRelatorioExpedicao();
+			//gerarRelatorioExpedicao();
 			break;
 		case 1:
 			status = StatusSolicitacao.RECEBIDO;
 			listaSolicitacoes = listaTodasSolicitacoes.stream().filter(s -> s.getStatus() == status).collect(Collectors.toList());
-			gerarRelatorioExpedicao();
+			//gerarRelatorioExpedicao();
 			break;
 		case 2:
 			status = StatusSolicitacao.PENDENTE;
 			listaSolicitacoes = listaTodasSolicitacoes.stream().filter(s -> s.getStatus() == status).collect(Collectors.toList());
-			gerarRelatorioExpedicao();
+			//gerarRelatorioExpedicao();
 			break;
 
 		default:
@@ -95,7 +94,7 @@ public class RelatoriosMB implements Serializable {
 	/**
 	 * Grava alterações da solicitação na base de dados
 	 */
-	public void gerarRelatorioExpedicao()  {
+	public StreamedContent getArquivo()  {
 		
 		List<SolicitacaoRel> listSolRel = new ArrayList<>();
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -105,7 +104,10 @@ public class RelatoriosMB implements Serializable {
 			SolicitacaoRel rel = new SolicitacaoRel();
 			rel.setId(s.getId());
 			rel.setNomeCliente(s.getCliente().getRazaoSocial());
-			rel.setStatus(s.getStatus().name());
+			
+			if(s.getStatus() != null) {
+				rel.setStatus(s.getStatus().name());				
+			}
 			
 			if(s.getDateColeta() != null) {
 				rel.setDataColeta(s.getDateColeta().format(timeFormatter));				
@@ -124,7 +126,7 @@ public class RelatoriosMB implements Serializable {
 //		ByteArrayOutputStream outputStream = Relatorios.relatorioExpedicao(listSolRel, status);
 		InputStream inputStream = relatorios.relatorioExpedicao(listSolRel, status);
 		
-		arquivo = new DefaultStreamedContent(inputStream, "application/pdf", nomeRelatorio);
+		return new DefaultStreamedContent(inputStream, "application/pdf", nomeRelatorio);
 		
 	}
 	
@@ -169,14 +171,6 @@ public class RelatoriosMB implements Serializable {
 
 	public void setDataFinal(LocalDateTime dataFinal) {
 		this.dataFinal = dataFinal;
-	}
-
-	public StreamedContent getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(StreamedContent arquivo) {
-		this.arquivo = arquivo;
 	}
 
 	

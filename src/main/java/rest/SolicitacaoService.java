@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 
 import dao.SolicitacaoDAO;
 import dto.SolicitacaoDTO;
+import enums.StatusSolicitacao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,8 +36,10 @@ public class SolicitacaoService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 	@ApiOperation(value = "Receber solicitação")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Solicitação gravada com sucesso!"),
-			@ApiResponse(code = 500, message = "Erro interno no servidor") })
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Solicitação gravada com sucesso!"),
+			@ApiResponse(code = 500, message = "Erro interno no servidor") 
+			})
 	public Response receberSolicitacao(SolicitacaoDTO solicitacaoDTO) {
 
 		Solicitacao solicitacao = null;
@@ -44,7 +47,6 @@ public class SolicitacaoService {
 		try {
 
 			solicitacao  = mapper.map(solicitacaoDTO, Solicitacao.class);
-			solicitacao.setDateCadastro(LocalDateTime.now());
 			solicitacao = solicitacaoTrans.salvarSolicitacao(solicitacao);
 
 		} catch (Exception e) {

@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +11,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
+
+import util.UtilTime;
 
 public abstract class AbstractDAO<T, PK> implements Serializable {
 	
@@ -32,7 +35,10 @@ public abstract class AbstractDAO<T, PK> implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
-		classe = DetectClass.getEntityClass(getClass());
+		//classe = DetectClass.getEntityClass(getClass());
+		UtilTime.start();
+        this.classe = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        UtilTime.end();
 	}
 
 	public T save(T object) {
