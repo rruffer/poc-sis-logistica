@@ -2,12 +2,14 @@ package dao;
 
 import java.util.List;
 
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import enums.StatusSolicitacao;
 import model.Solicitacao;
 
+@Named
 public class SolicitacaoDAO extends AbstractDAO<Solicitacao, Long> {
 
 	private static final long serialVersionUID = -6982233927213571947L;

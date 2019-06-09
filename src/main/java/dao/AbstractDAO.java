@@ -10,15 +10,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 
-@Transactional(rollbackOn = Exception.class)
 public abstract class AbstractDAO<T, PK> implements Serializable {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4212686475276199372L;
 	private static final Logger log = Logger.getLogger("AbstractDAO");
+	
 	/**
 	 * 
 	 */

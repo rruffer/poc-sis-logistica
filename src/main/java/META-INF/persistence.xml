@@ -16,8 +16,8 @@
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.default_schema"
 				value="dblogistica" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
 
 		</properties>
 
