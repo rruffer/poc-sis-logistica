@@ -95,6 +95,7 @@ public class RelatoriosMB implements Serializable {
 	 * Grava alterações da solicitação na base de dados
 	 */
 	public StreamedContent getArquivo()  {
+
 		
 		List<SolicitacaoRel> listSolRel = new ArrayList<>();
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -127,7 +128,7 @@ public class RelatoriosMB implements Serializable {
 		InputStream inputStream = relatorios.relatorioExpedicao(listSolRel, status);
 		
 		return new DefaultStreamedContent(inputStream, "application/pdf", nomeRelatorio);
-		
+
 	}
 	
 	
