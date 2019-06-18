@@ -9,7 +9,7 @@ import javax.ws.rs.core.Application;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
-import rest.SolicitacaoService;
+import rest.SolicitacaoResource;
 
 /**
  * link https://www.youtube.com/watch?v=jjsd1UNbv2c link
@@ -42,7 +42,7 @@ public class RestApplication extends Application {
 	public Set<Class<?>> getClasses() {
 
 		Set<Class<?>> resources = new HashSet<>();
-		resources.add(SolicitacaoService.class);
+		resources.add(SolicitacaoResource.class);
 
 		// jackson
 		resources.add(JacksonJavaTimeConfiguration.class);

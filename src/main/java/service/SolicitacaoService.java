@@ -1,4 +1,4 @@
-package transaction;
+package service;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import model.Solicitacao;
 @Local
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class SolicitacaoTransaction {
+public class SolicitacaoService {
 
 	@Inject
 	private SolicitacaoDAO solicitacaoDAO;

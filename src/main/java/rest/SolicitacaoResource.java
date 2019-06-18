@@ -1,7 +1,5 @@
 package rest;
 
-import java.time.LocalDateTime;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
@@ -13,23 +11,22 @@ import javax.ws.rs.core.Response.Status;
 
 import org.modelmapper.ModelMapper;
 
-import dao.SolicitacaoDAO;
 import dto.SolicitacaoDTO;
-import enums.StatusSolicitacao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import model.Solicitacao;
-import transaction.SolicitacaoTransaction;
+//import service.SolicitacaoService;
+import service.SolicitacaoService;
 
 @Stateless
 @Path("/solicitacao")
 @Api(value = "Solicitacao")
-public class SolicitacaoService {
+public class SolicitacaoResource {
 
 	@Inject
-	private SolicitacaoTransaction solicitacaoTrans;
+	private SolicitacaoService solicitacaoTrans;
 	
 	private ModelMapper mapper = new ModelMapper();
 
