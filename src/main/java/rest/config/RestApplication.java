@@ -6,11 +6,6 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-import io.swagger.jaxrs.config.BeanConfig;
-import io.swagger.jaxrs.listing.ApiListingResource;
-import io.swagger.jaxrs.listing.SwaggerSerializers;
-import rest.SolicitacaoResource;
-
 /**
  * link https://www.youtube.com/watch?v=jjsd1UNbv2c link
  * https://github.com/ptitbob/swagger-ui-integration link
@@ -26,32 +21,15 @@ import rest.SolicitacaoResource;
 @ApplicationPath("/api")
 public class RestApplication extends Application {
 
-	public RestApplication() {
-		BeanConfig conf = new BeanConfig();
-		conf.setTitle("Logistica Logitech");
-		conf.setDescription("Serviços da empresa");
-		conf.setVersion("1.0.0");
-		conf.setHost("localhost:8080");
-		conf.setBasePath("/logistica/api");
-		conf.setSchemes(new String[] { "http" });
-		conf.setResourcePackage("rest");
-		conf.setScan(true);
-	}
-
-	@Override
+	/*@Override
 	public Set<Class<?>> getClasses() {
 
 		Set<Class<?>> resources = new HashSet<>();
-		resources.add(SolicitacaoResource.class);
 
 		// jackson
 		resources.add(JacksonJavaTimeConfiguration.class);
 
-		// classes do swagger...
-		resources.add(ApiListingResource.class);
-		resources.add(SwaggerSerializers.class);
-
 		return resources;
-	}
+	}*/
 
 }

@@ -18,8 +18,8 @@ import javax.persistence.NamedQuery;
 
 import enums.StatusSolicitacao;
 
-@NamedQuery(name=Solicitacao.SEARCH_SOL, query="SELECT s FROM Solicitacao s where s.status = :status ")
 @Entity
+@NamedQuery(name=Solicitacao.SEARCH_SOL, query="SELECT s FROM Solicitacao s where s.status = :status ")
 public class Solicitacao implements Serializable {
 
 	private static final long serialVersionUID = 3690495669934828690L;

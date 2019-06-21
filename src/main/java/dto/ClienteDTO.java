@@ -2,34 +2,34 @@ package dto;
 
 import java.io.Serializable;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 4857789627021900180L;
 
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private Long id;
 
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String razaoSocial;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String endereco;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String telefone;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String cnpj;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String inscEstadual;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private String inscMunicipal;
-	
-	@ApiModelProperty(hidden = true)
+
+	@Schema(hidden = true)
 	private String email;
 
 	/**

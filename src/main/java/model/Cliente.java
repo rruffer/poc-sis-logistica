@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +39,9 @@ public class Cliente implements Serializable {
 	
 	@Column(name="EMAIL")
 	private String email;
+	
+	@Column(name = "DATA_CADASTRO")
+	private LocalDateTime dataCadastro;
 
 	/**
 	 * @return the id
@@ -149,6 +153,14 @@ public class Cliente implements Serializable {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public LocalDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	@Override

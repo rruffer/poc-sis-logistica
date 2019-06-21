@@ -1,6 +1,7 @@
 package service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -24,6 +25,14 @@ public class SolicitacaoService {
 		solicitacao.setDateCadastro(LocalDateTime.now());
 		solicitacao.setStatus(StatusSolicitacao.PENDENTE);
 		return solicitacaoDAO.save(solicitacao);
+	}
+
+	public Solicitacao obterSolicitacaoPorID(long id) {
+		return solicitacaoDAO.find(id);
+	}
+
+	public List<Solicitacao> obterListaSolicitacao() {
+		return solicitacaoDAO.findAll();
 	}
 
 }

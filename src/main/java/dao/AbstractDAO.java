@@ -115,4 +115,8 @@ public abstract class AbstractDAO<T, PK> implements Serializable {
 		return em.find(classe, pk);
 	}
 
+	public Class<T> getClasse() {
+		return classe;
+	}
+	
 }

@@ -18,10 +18,10 @@ import model.User;
 
 //@WebFilter(urlPatterns={"/restricted/*", "/faces/*"})
 @WebFilter("/pages/private/*")
-public class FiltroDeNavegacao implements Filter{
+public class FiltroDeNavegacao implements Filter {
 	
 	@Inject
-	LogonMB logon;
+	private LogonMB logon;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

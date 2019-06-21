@@ -2,48 +2,54 @@ package dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import enums.StatusSolicitacao;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class SolicitacaoDTO {
 
-	@ApiModelProperty(hidden = true)
+//	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private Long id;
 
-	@ApiModelProperty(required=true, allowEmptyValue=false)
+//	@ApiModelProperty(required=true, allowEmptyValue=false)
+	@Schema(required = true)
 	private ClienteDTO cliente;
 
-	@ApiModelProperty(required=true)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	@Schema(required = true, pattern = "dd/MM/yyyy HH:mm:ss", format = "dd/MM/yyyy HH:mm:ss", example = "10/11/2019 01:12:00", defaultValue = "10/11/2019 01:12:00")
 	private LocalDateTime dateColeta;
 
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private String endColeta;
 
-	@ApiModelProperty(required=false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	@Schema(required = true, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dateEntrega;
 
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private String endEntrega;
 
-	@ApiModelProperty(hidden = true)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	@Schema(hidden = true, discriminatorProperty = "DISC", ref = "REF", title = "DATA")
 	private LocalDateTime dateCadastro;
 	
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private StatusSolicitacao status;
 	
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private String natureza;
 	
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private String especie;
 	
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private Integer quantidade;
 	
-	@ApiModelProperty(required=true)
+	@Schema(required = true)
 	private Double peso;
 
-	@ApiModelProperty(required=false)
 	private String observacao;
 
 	/**
@@ -142,6 +148,14 @@ public class SolicitacaoDTO {
 	 */
 	public void setDateCadastro(LocalDateTime dateCadastro) {
 		this.dateCadastro = dateCadastro;
+	}
+
+	public StatusSolicitacao getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusSolicitacao status) {
+		this.status = status;
 	}
 
 	/**
