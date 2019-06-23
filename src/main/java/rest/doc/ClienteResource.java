@@ -10,9 +10,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dto.ClienteDTO;
-import dto.SolicitacaoDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import model.TipoEsquema;
+import security.Secured;
 
 @Path("/clientes")
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,9 +31,11 @@ public interface ClienteResource {
 	@Operation(summary = "Pesquisar cliente", description = "Método retorna um cliente através do seu ID")
 	public Response obterCliente(@PathParam("id") long id);
 
+	@Secured(esquema = TipoEsquema.CLIENTE)
 	@POST
 	@Path("/addCliente")
-	@Operation(summary = "Aicionar cliente", description = "Método que adiciona um cliente")
+	@Operation(summary = "Adicionar cliente", description = "Método que adiciona um cliente")
+	@SecurityRequirement(name = "autCliente", scopes = "write: read")
 	public Response addCliente(ClienteDTO clienteDTO);
 
 }

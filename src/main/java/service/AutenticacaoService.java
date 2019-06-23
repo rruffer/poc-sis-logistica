@@ -9,9 +9,12 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import dao.AutenticacaoDAO;
+import dto.TokenDTO;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import model.Autenticacao;
+import model.TipoEsquema;
+import util.UtilDate;
 
 @Local
 @Stateless
@@ -27,10 +30,15 @@ public class AutenticacaoService {
 		return autenticacaoDAO.obterAutenticacao(usuario, senha);
 	}
 
-	public String obterToken(Autenticacao autenticacao) {
-		Date dateExpiration = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
-		return Jwts.builder().setSubject(autenticacao.getUsuario()).setExpiration(dateExpiration).signWith(SignatureAlgorithm.HS512, autenticacao.getChave()).compact();
+	public Autenticacao obterAutenticacaoPorEsquema(TipoEsquema esquema) {
+		return autenticacaoDAO.obterAutenticacao(esquema);
+		
 	}
 
+	public TokenDTO obterToken(Autenticacao autenticacao) {
+		Date dateExpiration = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+		String token = Jwts.builder().setSubject(autenticacao.getUsuario()).setExpiration(dateExpiration).signWith(SignatureAlgorithm.HS512, autenticacao.getChave()).compact();
+		return new TokenDTO(token, UtilDate.converterDateEmLocalDateTime(dateExpiration));
+	}
 
 }

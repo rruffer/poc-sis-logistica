@@ -1,8 +1,5 @@
 package rest.config;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -31,5 +28,57 @@ public class RestApplication extends Application {
 
 		return resources;
 	}*/
+	
+
+/*    public RestApplication(@Context ServletConfig servletConfig) {
+        super();
+        OpenAPI oas = new OpenAPI();
+        Info info = new Info()
+                .title("Swagger Sample App bootstrap code")
+                .description("This is a sample server Petstore server.  You can find out more about Swagger " +
+                        "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
+                        "you can use the api key `special-key` to test the authorization filters.")
+                .termsOfService("http://swagger.io/terms/")
+                .contact(new Contact()
+                        .email("apiteam@swagger.io"))
+                .license(new License()
+                        .name("Apache 2.0")
+                        .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
+
+        oas.info(info);
+        
+        Server server = new Server();
+        server.url("http://localhost:8080/logistica/\"");
+        server.description("Desenvolvimento");
+        
+        SecurityScheme s = new SecurityScheme();
+        s.name("authorization");
+        s.type(Type.APIKEY);
+        s.in(In.HEADER);
+        s.description("Autorização");
+        
+        Components components = new Components();
+        components.addSecuritySchemes("AUT", s);
+        oas.components(components);
+        
+        oas.addServersItem(server);
+        
+        SwaggerConfiguration oasConfig = new SwaggerConfiguration()
+                .openAPI(oas)
+                .prettyPrint(true)
+                .readAllResources(true)
+                .resourcePackages(Stream.of("rest.doc").collect(Collectors.toSet()));
+
+        try {
+            new JaxrsOpenApiContextBuilder()
+                    .servletConfig(servletConfig)
+                    .application(this)
+                    .openApiConfiguration(oasConfig)
+                    .buildContext(true);
+        } catch (OpenApiConfigurationException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+
+    }*/
 
 }

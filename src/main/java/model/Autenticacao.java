@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,15 +13,21 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQuery(name=Autenticacao.SEARCH_AUT, query="SELECT x FROM Autenticacao x where x.usuario = :usuario and x.senha = :senha")
+@NamedQuery(name=Autenticacao.SEARCH_AUT_ESQUEMA, query="SELECT x FROM Autenticacao x where x.esquema = :esquema")
 public class Autenticacao implements Serializable {
 
 	private static final long serialVersionUID = 4857789627021900180L;
 	public static final String SEARCH_AUT = "search_aut";
-
+	public static final String SEARCH_AUT_ESQUEMA = "search_aut_esquema";
+	
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ESQUEMA")
+	private TipoEsquema esquema;
 
 	@Column(name = "USUARIO")
 	private String usuario;
@@ -42,6 +50,14 @@ public class Autenticacao implements Serializable {
 	 */
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public TipoEsquema getEsquema() {
+		return esquema;
+	}
+
+	public void setEsquema(TipoEsquema esquema) {
+		this.esquema = esquema;
 	}
 
 	/**

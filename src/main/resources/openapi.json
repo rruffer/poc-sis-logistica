@@ -4,12 +4,6 @@
 	],
 	"prettyPrint": true,
 	"openAPI": {
-		"servers": [
-			{
-				"url": "http://localhost:8080/logistica/",
-				"description": "Desenvolvimento"
-			}
-		],
 		"info": {
 			"version": "1.0",
 			"title": "Swagger Pet Sample App",
@@ -21,6 +15,32 @@
 			"license": {
 				"name": "Apache 2.0",
 				"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+			}
+		},
+		"servers": [
+			{
+				"url": "http://localhost:8080/logistica/",
+				"description": "Desenvolvimento"
+			},
+			{
+				"url": "https://localhost:8080/logistica/",
+				"description": "Produção"
+			}
+		],
+		"components": {
+			"securitySchemes": {
+				"autSolicitacao": {
+					"type": "apiKey",
+					"in": "header",
+					"name": "authorization",
+					"description": "Token necessário para acesso as consultas sobre Solicitação"
+				},
+				"autCliente": {
+					"type": "apiKey",
+					"in": "header",
+					"name": "authorization",
+					"description": "Token necessário para acesso as consultas sobre Cliente"
+				}
 			}
 		}
 	}

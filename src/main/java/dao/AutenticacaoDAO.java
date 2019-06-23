@@ -4,6 +4,7 @@ import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import model.Autenticacao;
+import model.TipoEsquema;
 
 @Named
 public class AutenticacaoDAO extends AbstractDAO<Autenticacao, Long> {
@@ -18,6 +19,13 @@ public class AutenticacaoDAO extends AbstractDAO<Autenticacao, Long> {
 
 		return query.getSingleResult();
 
+	}
+
+	public Autenticacao obterAutenticacao(TipoEsquema esquema) {
+		TypedQuery<Autenticacao> query = entityManager().createNamedQuery(Autenticacao.SEARCH_AUT_ESQUEMA, Autenticacao.class);
+		query.setParameter("esquema", esquema);
+		
+		return query.getSingleResult();
 	}
 
 }

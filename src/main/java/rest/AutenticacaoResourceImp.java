@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import dto.TokenDTO;
 import model.Autenticacao;
 import rest.doc.AutenticacaoResource;
 import service.AutenticacaoService;
@@ -23,7 +24,7 @@ public class AutenticacaoResourceImp implements AutenticacaoResource {
 			return Response.noContent().build();
 		}
 		
-		String token = autenticacaoService.obterToken(autenticacao); 
+		TokenDTO token = autenticacaoService.obterToken(autenticacao); 
 
 		return Response.ok().entity(token).build();
 	}

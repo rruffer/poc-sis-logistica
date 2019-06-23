@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
-import util.UtilTime;
+import util.UtilDate;
 
 public abstract class AbstractDAO<T, PK> implements Serializable {
 	
@@ -36,9 +36,9 @@ public abstract class AbstractDAO<T, PK> implements Serializable {
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
 		//classe = DetectClass.getEntityClass(getClass());
-		UtilTime.start();
+		UtilDate.start();
         this.classe = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        UtilTime.end();
+        UtilDate.end();
 	}
 
 	public T save(T object) {
