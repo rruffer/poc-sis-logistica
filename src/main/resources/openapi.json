@@ -23,7 +23,7 @@
 				"description": "Desenvolvimento"
 			},
 			{
-				"url": "https://localhost:8080/logistica/",
+				"url": "https://www:8080/logistica/",
 				"description": "Produção"
 			}
 		],
