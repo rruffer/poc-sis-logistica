@@ -1,3 +1,4 @@
+package config;
 
 import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
